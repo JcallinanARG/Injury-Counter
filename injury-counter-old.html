@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+<style>
+  body {
+    margin: 0;
+    font-family: Segoe UI, sans-serif;
+    background: #7a0000;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+  }
+  .number { font-size: 80px; font-weight: bold; line-height: 1; }
+  .label { font-size: 18px; margin-top: 8px; opacity: 0.85; }
+  .since { font-size: 13px; margin-top: 6px; opacity: 0.6; }
+</style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">3EPSAD6PKMC3-1522906778-206</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">9c3e12b9-206a-41ab-98aa-2545db9eb2c6</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://amref.sharepoint.com/sites/Home/_layouts/15/DocIdRedir.aspx?ID=3EPSAD6PKMC3-1522906778-206, 3EPSAD6PKMC3-1522906778-206</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+  <div>
+    <div class="number" id="days">0</div>
+    <div class="label">Days Without a Recordable Injury</div>
+    <div class="since" id="since"></div>
+  </div>
+  <script>
+    // ← CHANGE THIS DATE to your last incident date
+    const lastIncident = new Date("2024-06-15");
+
+    const today = new Date();
+    const diff = Math.floor((today - lastIncident) / (1000 * 60 * 60 * 24));
+    document.getElementById("days").textContent = diff;
+    document.getElementById("since").textContent =
+      "Since " + lastIncident.toLocaleDateString("en-US", { year:"numeric", month:"long", day:"numeric" });
+  </script>
+</body>
+</html>

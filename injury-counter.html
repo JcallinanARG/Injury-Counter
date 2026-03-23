@@ -1,46 +1,111 @@
 <!DOCTYPE html>
-<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<style>
-  body {
-    margin: 0;
-    font-family: Segoe UI, sans-serif;
-    background: #7a0000;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-  }
-  .number { font-size: 80px; font-weight: bold; line-height: 1; }
-  .label { font-size: 18px; margin-top: 8px; opacity: 0.85; }
-  .since { font-size: 13px; margin-top: 6px; opacity: 0.6; }
-</style>
-
-<!--[if gte mso 9]><xml>
-<mso:CustomDocumentProperties>
-<mso:_dlc_DocId msdt:dt="string">3EPSAD6PKMC3-1522906778-206</mso:_dlc_DocId>
-<mso:_dlc_DocIdItemGuid msdt:dt="string">9c3e12b9-206a-41ab-98aa-2545db9eb2c6</mso:_dlc_DocIdItemGuid>
-<mso:_dlc_DocIdUrl msdt:dt="string">https://amref.sharepoint.com/sites/Home/_layouts/15/DocIdRedir.aspx?ID=3EPSAD6PKMC3-1522906778-206, 3EPSAD6PKMC3-1522906778-206</mso:_dlc_DocIdUrl>
-</mso:CustomDocumentProperties>
-</xml><![endif]-->
+    <title>Injury Records Page</title>
+    <style type="text/css">
+        body {
+            background-color: rgba(252, 252, 252, 0.9);
+        }
+        p.MsoNormal {
+            margin-bottom: .0001pt;
+            font-size: 11.0pt;
+            font-family: "Calibri","sans-serif";
+            margin-left: 0in;
+            margin-right: 0in;
+            margin-top: 0in;
+        }
+        .style2 {
+            font-family: Calibri;
+        }
+        .style5 {
+            background-color: #FFFF99;
+        }
+        .style6 {
+            background-color: #F6CEF5;
+            color: rgb(255,0,0);
+        }
+        .style7 {
+            text-decoration: underline;
+            background-color: #00FFFF;
+        }
+        .style8 {
+            background-color: #00FFFF;
+        }
+        .style9 {
+            text-align: left;
+        }
+        .contenttitle {
+            font-family: Calibri, sans-serif;
+            font-size: 11.0pt;
+        }
+    </style>
 </head>
 <body>
-  <div>
-    <div class="number" id="days">0</div>
-    <div class="label">Days Without a Recordable Injury</div>
-    <div class="since" id="since"></div>
-  </div>
-  <script>
-    // ← CHANGE THIS DATE to your last incident date
-    const lastIncident = new Date("2024-06-15");
+    <div>
+        <span class="contenttitle"><span><br/></span></span>
+        <img src="Green-Cross-Windmill.png" width="58" height="58" style="float: none;" alt="Logo" />
+        &nbsp;
+        <table border="0">
+            <tbody class="style2">
+                <tr>
+                    <td valign="top" style="height: 13px;">
+                        <span class="contenttitle"><strong>ARG BRADFORD: </strong></span>
+                        <span class="contenttitle">It has been
+                            <strong><span id="bradfordLWDI">0</span></strong>
+                            &nbsp;days since the last Lost Workday Injury.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" style="height: 6px;" class="style9">
+                        <span class="contenttitle">It has been
+                            <strong><span id="bradfordOSHA">0</span></strong>
+                            &nbsp;days since the last OSHA Recordable Injury.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="bottom" style="height: 13px;">
+                        <span class="contenttitle"><strong>ARG SANDYVILLE: </strong></span>
+                        <span class="contenttitle">It has been
+                            <strong><span id="sandyvilleLWDI">0</span></strong>
+                            &nbsp;days since the last Lost Workday Injury.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" style="height: 6px;" class="style9">
+                        <span class="contenttitle">It has been
+                            <strong><span id="sandyvilleOSHA">0</span></strong>
+                            &nbsp;days since the last OSHA Recordable Injury.</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+    </div>
 
-    const today = new Date();
-    const diff = Math.floor((today - lastIncident) / (1000 * 60 * 60 * 24));
-    document.getElementById("days").textContent = diff;
-    document.getElementById("since").textContent =
-      "Since " + lastIncident.toLocaleDateString("en-US", { year:"numeric", month:"long", day:"numeric" });
-  </script>
+    <script type="text/javascript">
+        // ============================================================
+        // UPDATE THESE DATES when an incident occurs (YYYY-MM-DD format)
+        // ============================================================
+        var dates = {
+            bradfordLWDI:     "2024-05-30",   // Bradford last Lost Workday Injury
+            bradfordOSHA:     "2024-05-30",   // Bradford last OSHA Recordable
+            sandyvilleLWDI:   "2017-05-18",   // Sandyville last Lost Workday Injury
+            sandyvilleOSHA:   "2022-02-10"    // Sandyville last OSHA Recordable
+        };
+        // ============================================================
+
+        function daysSince(dateStr) {
+            var past = new Date(dateStr);
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+            var diff = Math.floor((today - past) / (1000 * 60 * 60 * 24));
+            return diff;
+        }
+
+        document.getElementById("bradfordLWDI").textContent   = daysSince(dates.bradfordLWDI);
+        document.getElementById("bradfordOSHA").textContent   = daysSince(dates.bradfordOSHA);
+        document.getElementById("sandyvilleLWDI").textContent = daysSince(dates.sandyvilleLWDI);
+        document.getElementById("sandyvilleOSHA").textContent = daysSince(dates.sandyvilleOSHA);
+    </script>
 </body>
 </html>
